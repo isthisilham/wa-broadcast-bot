@@ -1,8 +1,9 @@
 node_modules/
 session/
 session-data/
-session-*/ 
-.leads.json
-contacts.csv
+session-*/
+.webjs_cache/
+*.csv
+*.json
 *.log
-.env
+media/
