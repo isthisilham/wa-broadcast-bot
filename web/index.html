@@ -7,13 +7,39 @@
     <body>
         <h2>Broadcast App Linktown</h2>
 
-        <!--Image Upload-->
+    <!--Image Upload-->
         <div>
             <label>Upload Gambar:</label>
             <input type="file" id="image">
+            <button onclick="uploadImage()">Upload Gambar</button>
         </div>
 
-        <!--Upload CSV-->
+        <script>
+            async function uploadImage() {
+                const fileInput = document.getElementById("image");
+                const file = fileInput.files[0];
+
+                if (!file) {
+                    alert("Upload gambarnya dulu ya...")
+                    return;
+                }
+
+                let formData = new FormData();
+                formData.append("image", file);
+
+                const response = await fetch("http://localhost:3000/upload-image", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await response.json();
+                console.log("Hasil upload image:", data);
+
+                alert("Gambar berhasil diupload!");
+            }
+        </script>
+
+    <!--Upload CSV-->
         <div>
             <label>Upload CSV Kontak:</label>
             <input type="file" id="csv">
@@ -35,10 +61,12 @@
 
         <button onclick="startbroadcast()">Start Broadcast</button>
 
-        <Script>
+        <script>
             function startbroadcast() {
                 alert("belum aktif fitur ini, masih testing 😄");
             }
-        </Script>
+        </script>
+
+        
     </body>
 </html>
