@@ -43,7 +43,33 @@
         <div>
             <label>Upload CSV Kontak:</label>
             <input type="file" id="csv">
+            <button onclick="uploadCSV()">Upload CSV</button>
         </div>
+
+        <script>
+            async function uploadCSV() {
+                const fileInput = document.getElementById("csv");
+                const file = fileInput.files[0];
+
+                if (!file) {
+                    alert("Upload CSV dulu ya...")
+                    return;
+                }
+
+                let formData = new FormData();
+                formData.append("csv", file);
+
+                const response = await fetch("http://localhost:3000/upload-csv", {
+                    method: "POST",
+                    body: formData
+                });
+                
+                const data = await response.json();
+                console.log("hasil upload csv:", data);
+
+                alert("CSV berhasil diupload!");
+            }
+        </script>
 
         <!--Caption-->
         <div>
